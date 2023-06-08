@@ -1,4 +1,4 @@
-# immersetodo
+# ImmerseTodo
 
 A new Flutter project.
 
