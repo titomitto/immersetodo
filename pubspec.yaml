@@ -35,6 +35,7 @@ dependencies:
   fl_country_code_picker: ^0.1.2
   pin_code_fields: ^7.4.0
   flutter_secure_storage: ^8.0.0
+  appwrite: ^8.1.0
 
 dev_dependencies:
   flutter_test:
