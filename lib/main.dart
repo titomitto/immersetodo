@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app.dart';
-import 'config/logger.dart';
+import 'utils/provider_logger.dart';
 import 'features/features.dart';
 
 Future<void> main() async {
@@ -14,7 +14,7 @@ Future<void> main() async {
 
   runApp(
     ProviderScope(
-      observers: [Logger()],
+      observers: [ProviderLogger()],
       child: const App(),
     ),
   );
