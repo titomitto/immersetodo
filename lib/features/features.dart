@@ -1,3 +1,7 @@
 import 'package:core/core.dart';
 
-List<Feature> features = [];
+import 'onboarding/onboarding.dart';
+
+List<Feature> features = [
+  OnboardingFeature(),
+];
