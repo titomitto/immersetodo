@@ -16,5 +16,12 @@ class OnboardingFeature extends Feature {
             return null;
           },
         ),
+        GoRoute(
+          path: OnboardingScreen.routePath,
+          builder: (context, state) => const OnboardingScreen(),
+          redirect: (context, state) {
+            return null;
+          },
+        ),
       ];
 }
