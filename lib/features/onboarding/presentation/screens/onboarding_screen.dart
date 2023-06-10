@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:immersetodo/features/onboarding/presentation/widgets/dukasoft_logo.dart';
 import 'package:immersetodo/utils/utils.dart';
 import '../controllers/onboarding_controller.dart';
 import '../states/onboarding_state.dart';
-import '../widgets/splash_banner.dart';
 
 class OnboardingScreen extends ConsumerWidget {
   static String routePath = "/intro";
@@ -23,9 +21,6 @@ class OnboardingScreen extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const ImmerseToDoLogo(height: 50),
-                  const SizedBox(height: 20),
-                  const SplashBanner(),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 35.0,
