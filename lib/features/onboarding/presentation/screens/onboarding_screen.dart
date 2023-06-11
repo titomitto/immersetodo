@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:immersetodo/utils/utils.dart';
+import '../../../auth/auth.dart';
 import '../controllers/onboarding_controller.dart';
 import '../states/onboarding_state.dart';
 
@@ -72,6 +74,10 @@ class ContinueButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     ref.listen(onboardingStateProvider, (previous, next) {
+      if (next is OnboardingCompleted) {
+        context.go(LoginScreen.routePath);
+      }
+
       if (next is OnboardingError) {
         next.failure.showSnackBar(context);
       }

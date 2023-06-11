@@ -9,3 +9,7 @@ final clientProvider = Provider<Client>((ref) {
     ..setProject(projectUrl)
     ..setSelfSigned(status: true);
 });
+
+final accountProvider = Provider<Account>((ref) {
+  return Account(ref.watch(clientProvider));
+});

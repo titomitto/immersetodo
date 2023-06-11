@@ -7,7 +7,7 @@ OutlineInputBorder defaultInputBorder = const OutlineInputBorder(
 
 Decoration outlinedContainerDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(5),
-  border: Border.all(color: const Color(0xffff8200), width: 1),
+  border: Border.all(color: Colors.black, width: 1),
   color: const Color(0x19ff8200),
 );
 
@@ -25,7 +25,7 @@ BoxDecoration kRoundedWhiteDecoration =
 
 Decoration kOutlinedContainerDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(5),
-  border: Border.all(color: const Color(0xffff8200), width: 1),
+  border: Border.all(color: Colors.black, width: 1),
   color: const Color(0x19ff8200),
 );
 Decoration kOutlinedGreyContainerDecoration = BoxDecoration(
