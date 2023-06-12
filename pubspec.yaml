@@ -48,6 +48,14 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.0
 
+flutter_launcher_icons:
+  android: "ic_launcher"
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/images/icon.png"
+  ios: true
+  image_path: "assets/images/icon.png"
+  remove_alpha_ios: true
+  
 
 flutter:
   uses-material-design: true

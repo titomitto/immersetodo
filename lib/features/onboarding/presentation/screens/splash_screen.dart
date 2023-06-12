@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:immersetodo/utils/extensions/failure.dart';
 
+import '../../../../config/images.dart';
 import '../../../auth/auth.dart';
 import '../../../home/presentation/screens/home_screen.dart';
 import '../controllers/onboarding_controller.dart';
@@ -31,11 +32,35 @@ class SplashScreen extends ConsumerWidget {
       }
     }); */
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        alignment: AlignmentDirectional.center,
-        child: const Text("Splash"),
-      ),
+      backgroundColor: Colors.black,
+      body: Column(children: [
+        Expanded(
+            child: Container(
+          alignment: AlignmentDirectional.center,
+          child: Image.asset(Images.appIcon, width: 200, height: 200),
+        )),
+        Container(
+          margin: EdgeInsets.only(bottom: 20),
+          child: Column(
+            children: [
+              Text(
+                "Immerse ToDo",
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                "v0.1.0",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.grey.shade300,
+                    ),
+              ),
+            ],
+          ),
+        )
+      ]),
     );
   }
 }
