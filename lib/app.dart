@@ -19,7 +19,7 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       theme: lightTheme,
       routerConfig: router,
-      title: APP_TITLE,
+      title: appTitle,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

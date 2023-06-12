@@ -15,7 +15,7 @@ class SplashScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    ref.listen<OnboardingState>(onboardingStateProvider, (prev, next) async {
+    /*  ref.listen<OnboardingState>(onboardingStateProvider, (prev, next) async {
       if (next is OnboardingCompleted) {
         await ref.read(authStateProvider.notifier).getUser();
         await Future.delayed(const Duration(seconds: 2));
@@ -29,7 +29,7 @@ class SplashScreen extends ConsumerWidget {
       if (next is OnboardingError) {
         next.failure.showSnackBar(context);
       }
-    });
+    }); */
     return Scaffold(
       body: Container(
         color: Colors.white,
