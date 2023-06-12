@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,5 +20,6 @@ final router = GoRouter(
 
 final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
   ref.watch(authStateProvider);
+
   return router;
 });

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,7 @@ class App extends ConsumerWidget {
     return MaterialApp.router(
       theme: lightTheme,
       routerConfig: router,
-      title: appTitle,
+      title: APP_TITLE,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

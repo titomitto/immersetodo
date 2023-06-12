@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/entities/user.dart';
@@ -84,10 +86,15 @@ class AuthController extends StateNotifier<AuthState> {
 
 final authStateProvider =
     StateNotifierProvider.autoDispose<AuthController, AuthState>((ref) {
+  var registerUseCase = ref.watch(registerUseCaseProvider);
+  var loginUseCase = ref.watch(loginUseCaseProvider);
+  var getUserUseCase = ref.watch(getAuthDataUseCaseProvider);
+  var logoutUseCase = ref.watch(logOutUseCaseProvider);
+
   return AuthController(
-    registerUseCase: ref.watch(registerUseCaseProvider),
-    loginUseCase: ref.watch(loginUseCaseProvider),
-    getUserUseCase: ref.watch(getAuthDataUseCaseProvider),
-    logoutUseCase: ref.watch(logOutUseCaseProvider),
+    registerUseCase: registerUseCase,
+    loginUseCase: loginUseCase,
+    getUserUseCase: getUserUseCase,
+    logoutUseCase: logoutUseCase,
   );
 });

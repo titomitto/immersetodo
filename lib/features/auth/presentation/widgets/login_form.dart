@@ -1,7 +1,9 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:immersetodo/utils/utils.dart';
+import '../../../home/presentation/screens/home_screen.dart';
 import '../../domain/validators/failures.dart';
 import '../../domain/validators/login_validator.dart';
 import 'continue_button.dart';
@@ -69,7 +71,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           context.showSuccessSnackBar(
             "Welcome ${state.user.firstName}",
           );
-          // context.go(HomeScreen.routePath);
+          context.go(HomeScreen.routePath);
         }
       },
     );

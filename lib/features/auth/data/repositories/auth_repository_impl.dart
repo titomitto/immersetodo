@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:core/core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dartz/dartz.dart';
@@ -73,8 +75,12 @@ class AuthRepositoryImpl implements AuthRepository {
 }
 
 final authRepositoryProvider = Provider.autoDispose<AuthRepository>((ref) {
+  var localDataSource = ref.watch(authLocalDataSourceProvider);
+
+  var remoteDataSource = ref.watch(authRemoteDataSourceProvider);
+
   return AuthRepositoryImpl(
-    localDataSource: ref.watch(authLocalDataSourceProvider),
-    remoteDataSource: ref.watch(authRemoteDataSourceProvider),
+    localDataSource: localDataSource,
+    remoteDataSource: remoteDataSource,
   );
 });
