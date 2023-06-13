@@ -10,6 +10,7 @@ import '../../domain/validators/failures.dart';
 import '../../domain/validators/login_validator.dart';
 import 'continue_button.dart';
 import 'google_button.dart';
+import 'or_login_with.dart';
 import 'password_input.dart';
 import 'register_button.dart';
 import '../../../../config/images.dart';
@@ -143,7 +144,11 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             title: 'Login',
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
+          ),
+          const OrLoginWith(),
+          const SizedBox(
+            height: 20,
           ),
           GoogleButton(
             onTap: () {},

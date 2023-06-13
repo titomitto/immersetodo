@@ -21,7 +21,7 @@ class GoogleButton extends StatelessWidget {
       onTap: isDisabled ? null : onTap,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
         margin: const EdgeInsets.symmetric(horizontal: 1),
         alignment: Alignment.center,
         decoration: BoxDecoration(
