@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
-import '../screens/register_screen.dart';
 
 class AccountAvailabilityWidget extends StatelessWidget {
   final String text;
