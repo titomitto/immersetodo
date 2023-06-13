@@ -8,8 +8,9 @@ import '../../../../config/styles.dart';
 import '../../../home/presentation/screens/home_screen.dart';
 import '../../domain/validators/failures.dart';
 import '../../domain/validators/login_validator.dart';
+import '../screens/register_screen.dart';
 import 'google_button.dart';
-import 'or_login_with.dart';
+import 'or_with.dart';
 import 'password_input.dart';
 import 'register_button.dart';
 import '../controllers/auth_controller.dart';
@@ -144,7 +145,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           const SizedBox(
             height: 20,
           ),
-          const OrLoginWith(),
+          const OrWith(
+            text: "login",
+          ),
           const SizedBox(
             height: 20,
           ),
@@ -155,7 +158,11 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           const SizedBox(
             height: 30,
           ),
-          const RegisterButton(),
+          AccountAvailabilityWidget(
+            text: "Don't have an account?",
+            actionText: "Sign up",
+            onTap: () => context.push(RegisterScreen.routePath),
+          ),
         ],
       ),
     );

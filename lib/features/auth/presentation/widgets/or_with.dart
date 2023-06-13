@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class OrLoginWith extends StatelessWidget {
-  const OrLoginWith({
+class OrWith extends StatelessWidget {
+  final String text;
+  const OrWith({
     super.key,
+    required this.text,
   });
 
   @override
@@ -19,7 +21,7 @@ class OrLoginWith extends StatelessWidget {
           width: 20,
         ),
         Text(
-          "Or login with",
+          "Or $text with",
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         const SizedBox(
