@@ -1,38 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../auth/presentation/presentation.dart';
 
-class CalenderView extends ConsumerStatefulWidget {
-  const CalenderView({
-    Key? key,
-  }) : super(key: key);
+class CalenderView extends ConsumerWidget {
+  const CalenderView({super.key});
 
   @override
-  _CalenderViewState createState() => _CalenderViewState();
-}
-
-class _CalenderViewState extends ConsumerState<CalenderView> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (DateTime.now().weekday >= 4) {
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final authState = ref.watch(authStateProvider);
     if (authState is! Authenticated) {
       return Container();
