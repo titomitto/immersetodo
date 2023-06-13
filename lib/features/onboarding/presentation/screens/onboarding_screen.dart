@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:immersetodo/utils/utils.dart';
+import '../../../../config/images.dart';
 import '../../../auth/auth.dart';
 import '../controllers/onboarding_controller.dart';
 import '../states/onboarding_state.dart';
@@ -15,6 +16,7 @@ class OnboardingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return Scaffold(
+      backgroundColor: Color(0xffF2F2F2),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,10 +33,24 @@ class OnboardingScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Image.asset(Images.personWorking),
                         const SizedBox(height: 20),
-                        buildIntroTitle(context),
+                        Text(
+                          "Welcome to Immerse ToDo",
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                        ),
                         const SizedBox(height: 10),
-                        buildIntroBody(context),
+                        Text(
+                          "Organize tasks, manage projects, immerse with Pomodoro, and track your stats. Get ready to supercharge your productivity journey! ",
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                  ),
+                        ),
                         const SizedBox(height: 20),
                         const ContinueButton(),
                       ],
@@ -46,22 +62,6 @@ class OnboardingScreen extends ConsumerWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Text buildIntroBody(BuildContext context) {
-    return Text(
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-      style: Theme.of(context).textTheme.bodyMedium,
-    );
-  }
-
-  Text buildIntroTitle(BuildContext context) {
-    return Text(
-      "Welcome to ImmerseToDo",
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
     );
   }
 }
@@ -94,23 +94,25 @@ class ContinueButton extends ConsumerWidget {
       );
     }
 
-    return MaterialButton(
-      onPressed: () {
+    return GestureDetector(
+      onTap: () {
         onboardingController.completeOnboarding();
       },
-      padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "Continue",
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: Theme.of(context).primaryColor,
-                ),
-          )
-        ],
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          "Continue",
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+        ),
       ),
     );
   }

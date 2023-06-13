@@ -16,7 +16,7 @@ class SplashScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    /*  ref.listen<OnboardingState>(onboardingStateProvider, (prev, next) async {
+    ref.listen<OnboardingState>(onboardingStateProvider, (prev, next) async {
       if (next is OnboardingCompleted) {
         await ref.read(authStateProvider.notifier).getUser();
         await Future.delayed(const Duration(seconds: 2));
@@ -24,13 +24,14 @@ class SplashScreen extends ConsumerWidget {
       }
 
       if (next is OnboardingNotCompleted) {
+        await Future.delayed(const Duration(seconds: 2));
         context.go(OnboardingScreen.routePath);
       }
 
       if (next is OnboardingError) {
         next.failure.showSnackBar(context);
       }
-    }); */
+    });
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(children: [
@@ -40,7 +41,7 @@ class SplashScreen extends ConsumerWidget {
           child: Image.asset(Images.appIcon, width: 200, height: 200),
         )),
         Container(
-          margin: EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.only(bottom: 20),
           child: Column(
             children: [
               Text(
