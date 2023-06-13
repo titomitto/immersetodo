@@ -8,12 +8,10 @@ import '../../../../config/styles.dart';
 import '../../../home/presentation/screens/home_screen.dart';
 import '../../domain/validators/failures.dart';
 import '../../domain/validators/login_validator.dart';
-import 'continue_button.dart';
 import 'google_button.dart';
 import 'or_login_with.dart';
 import 'password_input.dart';
 import 'register_button.dart';
-import '../../../../config/images.dart';
 import '../controllers/auth_controller.dart';
 import '../states/auth_state.dart';
 
