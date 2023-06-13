@@ -67,7 +67,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
     ref.listen(
       authStateProvider,
       (previous, state) {
-        if (state is LoginError) {
+        if (state is LoginFailed) {
           state.failure.showSnackBar(context);
         }
 
@@ -81,7 +81,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
     );
 
     final authController = ref.watch(authStateProvider.notifier);
-    final loginState = ref.watch(authStateProvider);
+    final authState = ref.watch(authStateProvider);
     final loginValidator = ref.watch(loginValidatorProvider);
 
     return Padding(
@@ -138,7 +138,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               height: 10,
             ),
             PrimaryButton(
-              isLoading: loginState is LoggingIn,
+              isLoading: authState is LoggingIn,
               onTap: () {
                 if (formKey.currentState!.validate()) {
                   authController.login(

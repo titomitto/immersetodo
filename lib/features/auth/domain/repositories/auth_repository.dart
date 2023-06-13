@@ -11,8 +11,6 @@ abstract class AuthRepository {
     String password,
   );
 
-  Future<Either<Failure, void>> resendVerification();
-
   Future<Either<Failure, void>> register(
     String name,
     String email,
@@ -20,4 +18,6 @@ abstract class AuthRepository {
   );
 
   Future<Either<Failure, void>> logout();
+
+  Future<Either<Failure, void>> sendEmailInstructions(String email);
 }

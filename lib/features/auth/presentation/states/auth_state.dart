@@ -10,8 +10,6 @@ class LoggingIn extends AuthState {}
 
 class Registering extends AuthState {}
 
-class VerifyingPassword extends AuthState {}
-
 class RegistrationSuccessful extends AuthState {}
 
 class Authenticated extends AuthState {
@@ -21,12 +19,21 @@ class Authenticated extends AuthState {
 
 class Unauthenticated extends AuthState {}
 
-class LoginError extends AuthState {
+class LoginFailed extends AuthState {
   final Failure failure;
-  LoginError(this.failure);
+  LoginFailed(this.failure);
 }
 
-class RegistrationError extends AuthState {
+class RegistrationFailed extends AuthState {
   final Failure failure;
-  RegistrationError(this.failure);
+  RegistrationFailed(this.failure);
+}
+
+class SendingInstructions extends AuthState {}
+
+class SendingInstructionsSuccessful extends AuthState {}
+
+class SendingInstructionsFailed extends AuthState {
+  final Failure failure;
+  SendingInstructionsFailed(this.failure);
 }

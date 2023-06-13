@@ -58,7 +58,7 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
     ref.listen(
       authStateProvider,
       (previous, state) {
-        if (state is RegistrationError) {
+        if (state is RegistrationFailed) {
           state.failure.showSnackBar(context);
         }
 

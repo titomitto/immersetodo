@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'data/data.dart';
 import "presentation/presentation.dart";
+import 'presentation/screens/forgot_password_screen.dart';
 
 export 'presentation/presentation.dart';
 
@@ -16,6 +17,10 @@ class AuthFeature extends Feature {
         GoRoute(
           path: RegisterScreen.routePath,
           builder: (context, state) => const RegisterScreen(),
+        ),
+        GoRoute(
+          path: ForgotPasswordScreen.routePath,
+          builder: (context, state) => const ForgotPasswordScreen(),
         ),
       ];
   @override

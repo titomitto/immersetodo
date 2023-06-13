@@ -2,12 +2,11 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:immersetodo/features/auth/domain/validators/phone_number_validator.dart';
 import 'package:immersetodo/utils/utils.dart';
 import 'package:immersetodo/widgets/primary_button.dart';
 import '../../../../config/styles.dart';
-import '../../../home/presentation/screens/home_screen.dart';
 import '../../domain/validators/failures.dart';
-import '../../domain/validators/login_validator.dart';
 import 'register_button.dart';
 import '../controllers/auth_controller.dart';
 import '../states/auth_state.dart';
@@ -44,22 +43,22 @@ class _LoginFormState extends ConsumerState<ForgotPasswordForm> {
     ref.listen(
       authStateProvider,
       (previous, state) {
-        if (state is LoginError) {
+        if (state is SendingInstructionsFailed) {
           state.failure.showSnackBar(context);
         }
 
-        if (state is Authenticated) {
+        if (state is SendingInstructionsSuccessful) {
           context.showSuccessSnackBar(
-            "Welcome ${state.user.firstName}",
+            "Instructions sent to ${emailController.text.trim()}",
           );
-          context.go(HomeScreen.routePath);
+          context.pop();
         }
       },
     );
 
     final authController = ref.watch(authStateProvider.notifier);
-    final loginState = ref.watch(authStateProvider);
-    final loginValidator = ref.watch(loginValidatorProvider);
+    final authState = ref.watch(authStateProvider);
+    final emailValidator = ref.watch(emailValidatorProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -72,8 +71,7 @@ class _LoginFormState extends ConsumerState<ForgotPasswordForm> {
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
-                final validationFailure =
-                    loginValidator.validatePassword(value!);
+                final validationFailure = emailValidator.validateEmail(value!);
                 return mapValidationFailureToMessage(
                     context, validationFailure);
               },
@@ -91,16 +89,15 @@ class _LoginFormState extends ConsumerState<ForgotPasswordForm> {
               height: 10,
             ),
             PrimaryButton(
-              isLoading: loginState is LoggingIn,
+              isLoading: authState is SendingInstructions,
               onTap: () {
-                /* if (formKey.currentState!.validate()) {
-                  authController.login(
+                if (formKey.currentState!.validate()) {
+                  authController.sendEmailInstructions(
                     email: emailController.text.trim(),
-                    password: passwordController.text.trim(),
                   );
-                } */
+                }
               },
-              title: 'Continue',
+              title: 'Send Instructions',
             ),
             const SizedBox(
               height: 30,

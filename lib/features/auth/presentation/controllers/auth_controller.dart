@@ -25,7 +25,7 @@ class AuthController extends StateNotifier<AuthState> {
     final response = await getUserUseCase();
 
     response.fold((failure) {
-      state = LoginError(failure);
+      state = LoginFailed(failure);
     }, (User user) {
       state = Authenticated(user);
     });
@@ -43,7 +43,7 @@ class AuthController extends StateNotifier<AuthState> {
     ));
 
     response.fold((failure) {
-      state = LoginError(failure);
+      state = LoginFailed(failure);
     }, (User user) {
       state = Authenticated(
         user,
@@ -65,7 +65,7 @@ class AuthController extends StateNotifier<AuthState> {
     ));
 
     response.fold((failure) {
-      state = RegistrationError(failure);
+      state = RegistrationFailed(failure);
     }, (_) {
       state = RegistrationSuccessful();
     });
@@ -75,7 +75,7 @@ class AuthController extends StateNotifier<AuthState> {
     state = LoggingIn();
     final response = await logoutUseCase();
     response.fold((failure) {
-      state = LoginError(failure);
+      state = LoginFailed(failure);
     }, (success) {
       state = Unauthenticated();
     });

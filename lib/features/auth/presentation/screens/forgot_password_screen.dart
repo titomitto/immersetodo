@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:immersetodo/features/auth/presentation/widgets/forgot_password_form.dart';
 import '../widgets/auth_header.dart';
-import '../widgets/register_form.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static String routePath = "/forgot-password";
@@ -23,7 +23,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                RegisterForm(),
+                ForgotPasswordForm(),
               ],
             ),
           ),

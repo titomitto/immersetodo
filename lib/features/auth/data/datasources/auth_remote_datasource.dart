@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:immersetodo/config/client.dart';
 import 'package:immersetodo/utils/utils.dart';
+import '../../../../config/constants.dart';
 import '../models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
@@ -18,9 +19,9 @@ abstract class AuthRemoteDataSource {
     String password,
   );
 
-  Future<void> sendVerification();
-
   Future<void> logout();
+
+  Future<void> sendEmailInstructions(String email);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -69,10 +70,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> sendVerification() {
+  Future<void> sendEmailInstructions(String email) {
     return ErrorHandler<void>().handleErrors(() async {
-      await account.createVerification(
-        url: 'https://immersetodo.com',
+      account.createRecovery(
+        email: email,
+        url: siteUrl,
       );
     });
   }
