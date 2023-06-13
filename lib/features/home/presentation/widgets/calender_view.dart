@@ -21,7 +21,6 @@ class CalenderView extends ConsumerWidget {
           ),
           height: 70,
           child: ListView(
-            controller: _scrollController,
             scrollDirection: Axis.horizontal,
             children: _generateDateWidgets(),
           ),
