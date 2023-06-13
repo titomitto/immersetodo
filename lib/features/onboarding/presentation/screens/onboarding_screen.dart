@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:immersetodo/utils/utils.dart';
 import '../../../../config/images.dart';
+import '../../../../widgets/primary_button.dart';
 import '../../../auth/auth.dart';
 import '../controllers/onboarding_controller.dart';
 import '../states/onboarding_state.dart';
@@ -48,7 +49,7 @@ class OnboardingScreen extends ConsumerWidget {
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: Colors.black54,
-                                    fontSize: 16,
+                                    fontSize: 15,
                                   ),
                         ),
                         const SizedBox(height: 20),
@@ -94,26 +95,11 @@ class ContinueButton extends ConsumerWidget {
       );
     }
 
-    return GestureDetector(
+    return PrimaryButton(
       onTap: () {
         onboardingController.completeOnboarding();
       },
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Text(
-          "Continue",
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-        ),
-      ),
+      title: "Continue",
     );
   }
 }
