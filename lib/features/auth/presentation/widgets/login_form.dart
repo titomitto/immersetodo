@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:immersetodo/utils/utils.dart';
+import 'package:immersetodo/widgets/primary_button.dart';
+import '../../../../config/styles.dart';
 import '../../../home/presentation/screens/home_screen.dart';
 import '../../domain/validators/failures.dart';
 import '../../domain/validators/login_validator.dart';
@@ -85,44 +87,22 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 130),
-          Image.asset(
-            Images.appIcon,
-            height: 30,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(
-            "Welcome Back!",
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge
-                ?.copyWith(fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Login to your account",
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(color: Colors.black54),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
           TextFormField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              hintText: "Email",
-            ),
             validator: (value) {
               final validationFailure = loginValidator.validatePassword(value!);
               return mapValidationFailureToMessage(context, validationFailure);
             },
+            decoration: InputDecoration(
+              filled: true,
+              isDense: true,
+              hintText: "Email",
+              suffixIconColor: Color(Colors.grey.value),
+              border: defaultInputBorder,
+              enabledBorder: defaultInputBorder,
+              focusedBorder: defaultInputBorder,
+            ),
           ),
           const SizedBox(height: 10),
           PasswordInput(
@@ -134,11 +114,24 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             },
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
-          ContinueButton(
+          Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: null, //() => context.push(ResetPasswordScreen.routePath),
+              child: Text(
+                "Forgot Password?",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          PrimaryButton(
             isLoading: loginState is LoggingIn,
-            onContinue: () {
+            onTap: () {
               if (formKey.currentState!.validate()) {
                 authController.login(
                   email: emailController.text.trim(),
@@ -146,19 +139,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                 );
               }
             },
+            title: 'Login',
           ),
           const SizedBox(
             height: 20,
-          ),
-          GestureDetector(
-            onTap: null, //() => context.push(ResetPasswordScreen.routePath),
-            child: Text(
-              "Forgot Password?",
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ),
-          const SizedBox(
-            height: 70,
           ),
           const RegisterButton(),
         ],

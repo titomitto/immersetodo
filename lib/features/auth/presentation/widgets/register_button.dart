@@ -11,12 +11,23 @@ class RegisterButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.push(RegisterScreen.routePath),
       behavior: HitTestBehavior.opaque,
-      child: Text(
-        "Register",
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-              color: Theme.of(context).primaryColor,
-            ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Don't have an account? ",
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).primaryColor,
+                ),
+          ),
+          Text(
+            "Register",
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: Theme.of(context).primaryColor,
+                ),
+          )
+        ],
       ),
     );
   }

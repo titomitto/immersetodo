@@ -21,7 +21,7 @@ final darkTheme = ThemeData(
 );
 
 final lightTheme = ThemeData(
-  primaryColor: const Color(0xffFF5E00),
+  primaryColor: Colors.black,
   brightness: Brightness.light,
   dividerColor: Colors.white54,
   scaffoldBackgroundColor: Colors.white,
