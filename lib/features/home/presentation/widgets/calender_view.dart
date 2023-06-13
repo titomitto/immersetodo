@@ -1,0 +1,139 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../auth/presentation/presentation.dart';
+
+class CalenderView extends ConsumerStatefulWidget {
+  const CalenderView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  _CalenderViewState createState() => _CalenderViewState();
+}
+
+class _CalenderViewState extends ConsumerState<CalenderView> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (DateTime.now().weekday >= 4) {
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = ref.watch(authStateProvider);
+    if (authState is! Authenticated) {
+      return Container();
+    }
+
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 5.0,
+          ),
+          height: 70,
+          child: ListView(
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            children: _generateDateWidgets(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  List<Widget> _generateDateWidgets() {
+    final currentDate = DateTime.now();
+    final startingDay =
+        currentDate.subtract(Duration(days: currentDate.weekday - 1));
+
+    return List<Widget>.generate(7, (index) {
+      final date = startingDay.add(Duration(days: index));
+      final day = _getFormattedDay(date.weekday);
+      final formattedDate = _getFormattedDate(date.day);
+      final isCurrentDay = currentDate.day == date.day &&
+          currentDate.month == date.month &&
+          currentDate.year == date.year;
+
+      return DayWidget(
+        day: day,
+        date: formattedDate,
+        isCurrentDay: isCurrentDay,
+      );
+    });
+  }
+
+  String _getFormattedDay(int weekday) {
+    const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    return daysOfWeek[weekday - 1];
+  }
+
+  String _getFormattedDate(int day) {
+    return day.toString().padLeft(2, '0');
+  }
+}
+
+class DayWidget extends StatelessWidget {
+  final String day;
+  final String date;
+  final bool isCurrentDay;
+
+  const DayWidget({
+    Key? key,
+    required this.day,
+    required this.date,
+    required this.isCurrentDay,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+      child: Column(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                day,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.black45,
+                    ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                date,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+              ),
+              const SizedBox(height: 5),
+            ],
+          ),
+          if (isCurrentDay)
+            Icon(
+              Icons.circle,
+              size: 8,
+              color: Theme.of(context).primaryColor,
+            ),
+        ],
+      ),
+    );
+  }
+}
