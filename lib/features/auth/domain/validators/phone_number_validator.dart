@@ -14,8 +14,8 @@ class EmailValidator extends Validator<String> {
   }
 
   @override
-  ValidationFailure? validate(String email) {
-    final emailError = validateEmail(email);
+  ValidationFailure? validate(String params) {
+    final emailError = validateEmail(params);
 
     if (emailError != null) {
       return emailError;

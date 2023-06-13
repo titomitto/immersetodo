@@ -41,7 +41,7 @@ class ErrorHandler<T> {
     }
   }
 
-  Future<Either<Failure, T>> handleExceptions<T>(
+  Future<Either<Failure, T>> handleExceptions(
       Future<T> Function() asyncFunction) async {
     try {
       return Right(await asyncFunction());

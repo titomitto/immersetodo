@@ -21,8 +21,8 @@ class OnboardingRepositoryImpl extends OnboardingRepository {
 
   @override
   Future<Either<Failure, void>> completeOnboarding() async {
-    return ErrorHandler<bool>().handleExceptions(() async {
-      return await localDataSource.completeOnboarding();
+    return ErrorHandler<void>().handleExceptions(() async {
+      await localDataSource.completeOnboarding();
     });
   }
 }

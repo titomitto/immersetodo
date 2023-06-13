@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:appwrite/appwrite.dart';
 import 'package:core/core.dart';
 import 'package:flutter/widgets.dart';

@@ -54,7 +54,7 @@ class HomeScreen extends ConsumerWidget {
                 child: Center(
               child: Text(
                 "Welcome to Immerse ToDo",
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
             )),
           ],
