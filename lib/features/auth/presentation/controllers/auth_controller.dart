@@ -5,6 +5,7 @@ import '../../domain/usecases/get_user.dart';
 import '../../domain/usecases/login.dart';
 import '../../domain/usecases/logout.dart';
 import '../../domain/usecases/register.dart';
+import '../../domain/usecases/send_email_instructions.dart';
 import '../states/auth_state.dart';
 
 class AuthController extends StateNotifier<AuthState> {
@@ -12,11 +13,13 @@ class AuthController extends StateNotifier<AuthState> {
   Register registerUseCase;
   Logout logoutUseCase;
   GetUser getUserUseCase;
+  SendEmailInstructions sendEmailInstructionsUseCase;
   AuthController({
     required this.loginUseCase,
     required this.registerUseCase,
     required this.getUserUseCase,
     required this.logoutUseCase,
+    required this.sendEmailInstructionsUseCase,
   }) : super(LoginInitial());
 
   Future<void> getUser() async {
@@ -80,6 +83,20 @@ class AuthController extends StateNotifier<AuthState> {
       state = Unauthenticated();
     });
   }
+
+  void sendEmailInstructions({required String email}) async {
+    state = SendingInstructions();
+
+    final response = await sendEmailInstructionsUseCase(
+      SendEmailInstructionsParams(email: email),
+    );
+
+    response.fold((failure) {
+      state = SendingInstructionsFailed(failure);
+    }, (_) {
+      state = SendingInstructionsSuccessful();
+    });
+  }
 }
 
 final authStateProvider =
@@ -88,11 +105,14 @@ final authStateProvider =
   var loginUseCase = ref.watch(loginUseCaseProvider);
   var getUserUseCase = ref.watch(getAuthDataUseCaseProvider);
   var logoutUseCase = ref.watch(logOutUseCaseProvider);
+  var sendEmailInstructionsUseCase =
+      ref.watch(sendEmailInstructionsUseCaseProvider);
 
   return AuthController(
     registerUseCase: registerUseCase,
     loginUseCase: loginUseCase,
     getUserUseCase: getUserUseCase,
     logoutUseCase: logoutUseCase,
+    sendEmailInstructionsUseCase: sendEmailInstructionsUseCase,
   );
 });

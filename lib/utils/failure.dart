@@ -6,5 +6,13 @@ String mapFailureToMessage(context, Failure failure) {
     return AppLocalizations.of(context).networkFailed;
   }
 
+  if (failure is ValidationFailure) {
+    return AppLocalizations.of(context).validationFailed;
+  }
+
+  if (failure is AppwriteFailure) {
+    return failure.message;
+  }
+
   return AppLocalizations.of(context).somethingWentWrong;
 }

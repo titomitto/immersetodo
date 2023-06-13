@@ -65,9 +65,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> resendVerification() {
+  Future<Either<Failure, void>> sendEmailInstructions(String email) {
     return ErrorHandler<void>().handleExceptions(() async {
-      await remoteDataSource.sendVerification();
+      await remoteDataSource.sendEmailInstructions(email);
     });
   }
 }

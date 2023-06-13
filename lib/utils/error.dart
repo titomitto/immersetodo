@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:appwrite/appwrite.dart';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -8,13 +9,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 class ErrorHandler<T> {
   var validExceptions = [
     CacheException,
-    ServerException,
-    UnauthorizedException,
-    UnexpectedResponseException,
-    ServerValidationException,
-    NotFoundException,
-    NoInternetException,
+    NetworkException,
     InvalidArgumentException,
+    AppwriteException,
   ];
 
   Future<T> handleErrors(
@@ -26,10 +23,6 @@ class ErrorHandler<T> {
       if (validExceptions.contains(error.runtimeType)) {
         rethrow;
       }
-
-      /* if (validExceptions.contains(error.error.runtimeType)) {
-        throw error.error!;
-      } */
 
       if (error is HiveError) {
         log("Hive error: $error", stackTrace: stackTrace);
@@ -48,18 +41,14 @@ class ErrorHandler<T> {
     } catch (error) {
       if (error is CacheException) {
         return Left(CacheFailure());
-      } else if (error is ServerException) {
-        return Left(ServerFailure());
-      } else if (error is UnauthorizedException) {
-        return Left(UnauthorizedFailure());
-      } else if (error is UnexpectedResponseException) {
-        return Left(UnexpectedResponseFailure());
-      } else if (error is ServerValidationException) {
-        return Left(ServerValidationFailure());
-      } else if (error is NotFoundException) {
-        return Left(NotFoundFailure());
-      } else if (error is NoInternetException) {
-        return Left(NoInternetFailure());
+      } else if (error is NetworkException) {
+        return Left(NetworkFailure());
+      } else if (error is AppwriteException) {
+        log("AppwriteError ${error.type}, ${error.message}");
+        if (error.message?.contains("Failed host lookup") ?? false) {
+          return Left(NetworkFailure());
+        }
+        return Left(AppwriteFailure(error.message ?? "Unknown error"));
       } else {
         return Left(InvalidArgumentFailure());
       }

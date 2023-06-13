@@ -1,4 +1,5 @@
 {
-    "networkFailed": "Network failed",
-    "somethingWentWrong": "Something went wrong"
+    "networkFailed": "No internet connection",
+    "somethingWentWrong": "Something went wrong",
+    "validationFailed": "Validation failed"
 }

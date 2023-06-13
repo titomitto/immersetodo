@@ -1,6 +1,5 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:core/core.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:immersetodo/config/client.dart';
 import 'package:immersetodo/utils/utils.dart';
@@ -72,7 +71,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> sendEmailInstructions(String email) {
     return ErrorHandler<void>().handleErrors(() async {
-      account.createRecovery(
+      await account.createRecovery(
         email: email,
         url: siteUrl,
       );
@@ -83,7 +82,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> logout() {
     return ErrorHandler<void>().handleErrors(() async {
       var session = await account.getSession(sessionId: 'current');
-      debugPrint("SESH ${session.toMap()}");
       await account.deleteSession(sessionId: session.$id);
     });
   }
