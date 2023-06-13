@@ -1,7 +1,5 @@
 import 'package:core/core.dart';
 
-class EmailLengthFailure extends ValidationFailure {}
-
 class RequiredNameFailure extends ValidationFailure {}
 
 class RequiredEmailFailure extends ValidationFailure {}

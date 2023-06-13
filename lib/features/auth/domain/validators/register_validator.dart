@@ -16,9 +16,6 @@ class RegisterValidator extends Validator<RegisterParams> {
     if (email.isEmpty) {
       return RequiredEmailFailure();
     }
-    if (email.length < 9) {
-      return EmailLengthFailure();
-    }
     return null;
   }
 

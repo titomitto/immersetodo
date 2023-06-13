@@ -10,20 +10,22 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.white,
-      body: SizedBox(
-        width: double.infinity,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              AuthHeader(
-                title: "Welcome Back!",
-                subtitle: "Enter your email and password to continue",
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              LoginForm(),
-            ],
+      body: SafeArea(
+        child: SizedBox(
+          width: double.infinity,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AuthHeader(
+                  title: "Welcome Back!",
+                  subtitle: "Enter your email and password to continue",
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                LoginForm(),
+              ],
+            ),
           ),
         ),
       ),

@@ -9,9 +9,6 @@ class LoginValidator extends Validator<LoginParams> {
     if (email.isEmpty) {
       return RequiredEmailFailure();
     }
-    if (email.length < 9) {
-      return EmailLengthFailure();
-    }
     return null;
   }
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../widgets/auth_header.dart';
 import '../widgets/register_form.dart';
 
-class RegisterScreen extends StatelessWidget {
-  static String routePath = "/register";
-  const RegisterScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  static String routePath = "/forgot-password";
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,8 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               children: [
                 AuthHeader(
-                  title: "Create Account",
-                  subtitle: "Enter your details to continue",
+                  title: "Forgot Password",
+                  subtitle: "Enter your email to continue",
                 ),
                 SizedBox(
                   height: 30,

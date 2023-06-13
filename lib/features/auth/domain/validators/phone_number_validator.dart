@@ -7,9 +7,6 @@ class EmailValidator extends Validator<String> {
     if (email.isEmpty) {
       return RequiredEmailFailure();
     }
-    if (email.length < 9) {
-      return EmailLengthFailure();
-    }
     return null;
   }
 

@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:immersetodo/features/auth/presentation/widgets/register_button.dart';
 import 'package:immersetodo/utils/utils.dart';
 
-import '../../../../config/images.dart';
 import '../../../../config/styles.dart';
 import '../../../../widgets/primary_button.dart';
 import '../../domain/validators/failures.dart';
@@ -62,131 +61,115 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
         if (state is RegistrationError) {
           state.failure.showSnackBar(context);
         }
+
+        if (state is RegistrationSuccessful) {
+          context.showSuccessSnackBar("Registration successful");
+          context.pop();
+        }
       },
     );
-    return Form(
-      key: formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: 100),
-          Image.asset(
-            Images.appIcon,
-            height: 30,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(
-            "Create an account",
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge
-                ?.copyWith(fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Sign up to get started!",
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(color: Colors.black54),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextFormField(
-            controller: fullNameController,
-            keyboardType: TextInputType.text,
-            validator: (value) {
-              final validationFailure =
-                  registerValidator.validateFullName(value!);
-              return mapValidationFailureToMessage(context, validationFailure);
-            },
-            decoration: InputDecoration(
-              filled: true,
-              isDense: true,
-              hintText: "Full Name",
-              suffixIconColor: Color(Colors.grey.value),
-              border: defaultInputBorder,
-              enabledBorder: defaultInputBorder,
-              focusedBorder: defaultInputBorder,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Form(
+        key: formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextFormField(
+              controller: fullNameController,
+              keyboardType: TextInputType.text,
+              validator: (value) {
+                final validationFailure =
+                    registerValidator.validateFullName(value!);
+                return mapValidationFailureToMessage(
+                    context, validationFailure);
+              },
+              decoration: InputDecoration(
+                filled: true,
+                isDense: true,
+                hintText: "Full Name",
+                suffixIconColor: Color(Colors.grey.value),
+                border: defaultInputBorder,
+                enabledBorder: defaultInputBorder,
+                focusedBorder: defaultInputBorder,
+              ),
             ),
-          ),
-          const SizedBox(height: 10),
-          TextFormField(
-            controller: emailController,
-            keyboardType: TextInputType.emailAddress,
-            validator: (value) {
-              final validationFailure =
-                  registerValidator.validatePassword(value!);
-              return mapValidationFailureToMessage(context, validationFailure);
-            },
-            decoration: InputDecoration(
-              filled: true,
-              isDense: true,
-              hintText: "Email",
-              suffixIconColor: Color(Colors.grey.value),
-              border: defaultInputBorder,
-              enabledBorder: defaultInputBorder,
-              focusedBorder: defaultInputBorder,
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+              validator: (value) {
+                final validationFailure =
+                    registerValidator.validatePassword(value!);
+                return mapValidationFailureToMessage(
+                    context, validationFailure);
+              },
+              decoration: InputDecoration(
+                filled: true,
+                isDense: true,
+                hintText: "Email",
+                suffixIconColor: Color(Colors.grey.value),
+                border: defaultInputBorder,
+                enabledBorder: defaultInputBorder,
+                focusedBorder: defaultInputBorder,
+              ),
             ),
-          ),
-          const SizedBox(height: 10),
-          PasswordInput(
-            hintText: "Password",
-            controller: passwordController,
-            validator: (value) {
-              final validationFailure =
-                  registerValidator.validatePassword(value!);
-              return mapValidationFailureToMessage(context, validationFailure);
-            },
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          PrimaryButton(
-            isLoading: authState is Registering,
-            onTap: () {
-              if (formKey.currentState!.validate()) {
-                authController.login(
-                  email: emailController.text.trim(),
-                  password: passwordController.text.trim(),
-                );
-              }
-            },
-            title: 'Sign up',
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const OrWith(
-            text: "register",
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          GoogleButton(
-            onTap: () {},
-            title: 'Sign up with Google',
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          AccountAvailabilityWidget(
-            text: "Already have an account?",
-            actionText: "Login",
-            onTap: () => context.pop(),
-          ),
-          const SizedBox(
-            height: 70,
-          ),
-        ],
+            const SizedBox(height: 10),
+            PasswordInput(
+              hintText: "Password",
+              controller: passwordController,
+              validator: (value) {
+                final validationFailure =
+                    registerValidator.validatePassword(value!);
+                return mapValidationFailureToMessage(
+                    context, validationFailure);
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            PrimaryButton(
+              isLoading: authState is Registering,
+              onTap: () {
+                if (formKey.currentState!.validate()) {
+                  authController.register(
+                    fullName: fullNameController.text.trim(),
+                    email: emailController.text.trim(),
+                    password: passwordController.text.trim(),
+                  );
+                }
+              },
+              title: 'Sign up',
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const OrWith(
+              text: "register",
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            GoogleButton(
+              onTap: () {},
+              title: 'Sign up with Google',
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            AccountAvailabilityWidget(
+              text: "Already have an account?",
+              actionText: "Login",
+              onTap: () => context.pop(),
+            ),
+            const SizedBox(
+              height: 70,
+            ),
+          ],
+        ),
       ),
     );
   }
