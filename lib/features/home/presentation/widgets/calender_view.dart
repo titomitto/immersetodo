@@ -19,8 +19,9 @@ class CalenderView extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: 5.0,
           ),
-          height: 70,
+          height: 90,
           child: ListView(
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             children: _generateDateWidgets(),
           ),
@@ -75,7 +76,7 @@ class DayWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
       child: Column(
         children: [
           Column(
@@ -89,12 +90,21 @@ class DayWidget extends StatelessWidget {
                     ),
               ),
               const SizedBox(height: 8),
-              Text(
-                date,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                decoration: BoxDecoration(
+                  color: isCurrentDay
+                      ? Theme.of(context).primaryColor
+                      : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+                child: Text(
+                  date,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
+                      color: isCurrentDay ? Colors.white : Colors.black,
+                      fontSize: 19),
+                ),
               ),
               const SizedBox(height: 5),
             ],
@@ -102,7 +112,7 @@ class DayWidget extends StatelessWidget {
           if (isCurrentDay)
             Icon(
               Icons.circle,
-              size: 8,
+              size: 6,
               color: Theme.of(context).primaryColor,
             ),
         ],

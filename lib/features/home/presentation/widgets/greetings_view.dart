@@ -60,12 +60,6 @@ class GreetingsView extends ConsumerWidget {
               FeatherIcons.bell,
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              FeatherIcons.moon,
-            ),
-          ),
         ],
       ),
     );

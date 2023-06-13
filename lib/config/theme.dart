@@ -39,8 +39,8 @@ final lightTheme = ThemeData(
   ),
   colorScheme: ColorScheme.fromSwatch(
     brightness: Brightness.light,
-    primarySwatch: const Color(0xffFF5E00).toMaterialColor(),
+    primarySwatch: Colors.black.toMaterialColor(),
   ).copyWith(
-    secondary: const Color(0xffFF5E00),
+    secondary: Colors.black,
   ),
 );
