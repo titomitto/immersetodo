@@ -17,7 +17,7 @@ class AuthHeader extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const SizedBox(height: 80),
+        const SizedBox(height: 50),
         Image.asset(
           Images.dropIconBlack,
           height: 50,
@@ -39,7 +39,6 @@ class AuthHeader extends StatelessWidget {
           subtitle,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 15),
         ),
-        const SizedBox(height: 10),
       ]),
     );
   }

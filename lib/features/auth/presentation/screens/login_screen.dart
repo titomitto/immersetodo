@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
                   subtitle: "Enter your email and password to continue",
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 LoginForm(),
               ],

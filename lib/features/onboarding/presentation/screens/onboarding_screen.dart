@@ -28,13 +28,15 @@ class OnboardingScreen extends ConsumerWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 35.0,
+                      horizontal: 25.0,
                       vertical: 10,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset(Images.personWorking),
+                        Container(
+                            margin: EdgeInsets.symmetric(horizontal: 10),
+                            child: Image.asset(Images.personWorking)),
                         const SizedBox(height: 20),
                         Text(
                           "Welcome to Immerse ToDo",

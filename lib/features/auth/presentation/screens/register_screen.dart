@@ -21,7 +21,7 @@ class RegisterScreen extends StatelessWidget {
                   subtitle: "Enter your details to continue",
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 RegisterForm(),
               ],

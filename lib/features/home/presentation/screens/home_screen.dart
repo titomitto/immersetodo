@@ -24,26 +24,6 @@ class HomeScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        //backgroundColor: Colors.deepOrange,
-        title: Image.asset(
-          Images.appIcon,
-          height: 30,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(FeatherIcons.bell),
-          ),
-          IconButton(
-            onPressed: () {
-              ref.read(authStateProvider.notifier).logout();
-            },
-            icon: const Icon(FeatherIcons.shoppingCart),
-          ),
-        ],
-      ),
-      drawer: const HomeDrawer(),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
