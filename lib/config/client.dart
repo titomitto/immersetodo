@@ -13,3 +13,7 @@ final clientProvider = Provider<Client>((ref) {
 final accountProvider = Provider<Account>((ref) {
   return Account(ref.watch(clientProvider));
 });
+
+final databasesProvider = Provider<Databases>((ref) {
+  return Databases(ref.watch(clientProvider));
+});

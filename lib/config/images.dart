@@ -5,4 +5,6 @@ class Images {
   static const String dropIcon = "assets/images/drop-silhouette.png";
   static const String googleIcon = "assets/images/google.png";
   static const String userPlaceholder = "assets/images/user-2.png";
+  static const String smilingFolder = "assets/images/smiling-folder.json";
+  static const String errorState = "assets/images/error-state.json";
 }

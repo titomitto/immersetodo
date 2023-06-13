@@ -17,7 +17,7 @@ class GreetingsView extends ConsumerWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
