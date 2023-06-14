@@ -8,8 +8,10 @@ import '../validators/task_validator.dart';
 
 class AddTaskParams {
   String title;
+  String description;
   AddTaskParams({
     required this.title,
+    required this.description,
   });
 }
 
@@ -30,7 +32,7 @@ class AddTask extends UseCase<void, AddTaskParams> {
       return Left(validationFailure);
     }
 
-    return repository.createTask(params.title);
+    return repository.createTask(params.title, params.description);
   }
 }
 

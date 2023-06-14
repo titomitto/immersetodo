@@ -10,7 +10,7 @@ import '../models/task_model.dart';
 
 abstract class TasksRemoteDataSource implements LocalDataSource {
   Future<List<TaskModel>> getTasks();
-  Future<void> addTask(String title);
+  Future<void> addTask(String title, String description);
   Future<void> updateTask(TaskModel task);
   Future<void> deleteTask(TaskModel task);
 }
@@ -42,11 +42,12 @@ class TasksLocalDataSourceImpl extends TasksRemoteDataSource {
   }
 
   @override
-  Future<bool> addTask(String title) async {
+  Future<bool> addTask(String title, String description) async {
     try {
       final task = TaskModel(
         title: title,
         isDone: false,
+        description: description,
       );
       await databases.createDocument(
         databaseId: databaseId,

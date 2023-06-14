@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,9 +6,11 @@ import 'package:go_router/go_router.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 import '../../../auth/presentation/screens/login_screen.dart';
 import '../../../auth/presentation/states/auth_state.dart';
-import '../../../tasks/presentation/screens/add_task_screen.dart';
+import '../../../tasks/presentation/widgets/add_task_form.dart';
 import '../../../tasks/presentation/widgets/tasks_list_view.dart';
 import '../widgets/greetings_view.dart';
+
+final homeScreenIndexProvider = Provider<int>((ref) => 0);
 
 class HomeScreen extends ConsumerWidget {
   static String routePath = "/";
@@ -24,30 +24,20 @@ class HomeScreen extends ConsumerWidget {
         await ref.read(authStateProvider.notifier).logout();
       }
     });
-
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GreetingsView(),
-              //CalenderView(),
-              Expanded(child: TasksListView()),
-            ],
-          ),
-        ),
+        child: {
+          0: homeView(),
+          1: const TasksListView(),
+          3: const AddTaskForm(),
+          4: const GreetingsView(),
+        }[ref.watch(homeScreenIndexProvider)]!,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         onTap: (index) {
-          log("index: $index");
-          if (index == 2) {
-            context.push(AddTaskScreen.routePath);
-            return;
-            /* showBottomSheet(
-                context: context, builder: (context) => const AddTaskForm(),); */
+          if (index != 2) {
+            //ref.read(homeScreenIndexProvider) = index;
           }
         },
         backgroundColor: Colors.white,
@@ -64,12 +54,48 @@ class HomeScreen extends ConsumerWidget {
             label: "Projects",
           ),
           BottomNavigationBarItem(
-            icon: AbsorbPointer(
-              child: FloatingActionButton(
-                mini: true,
-                onPressed: () {},
-                child: Icon(FeatherIcons.plus),
-              ),
+            icon: FloatingActionButton(
+              mini: true,
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  context: context,
+                  builder: (context) => Container(
+                      padding: const EdgeInsets.all(20).copyWith(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(children: [
+                            const Text(
+                              "Add Task",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            // Close button
+                            const Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(FeatherIcons.x),
+                            ),
+                          ]),
+                          const AddTaskForm(),
+                        ],
+                      )),
+                );
+              },
+              child: Icon(FeatherIcons.plus),
             ),
             label: '',
           ),
@@ -81,6 +107,20 @@ class HomeScreen extends ConsumerWidget {
             icon: Icon(FeatherIcons.settings),
             label: "Settings",
           ),
+        ],
+      ),
+    );
+  }
+
+  Container homeView() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GreetingsView(),
+          //CalenderView(),
+          Expanded(child: TasksListView()),
         ],
       ),
     );

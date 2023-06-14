@@ -23,9 +23,10 @@ class TasksRepositoryImpl extends TasksRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> createTask(String title) async {
+  Future<Either<Failure, Unit>> createTask(
+      String title, String description) async {
     try {
-      await localDataSource.addTask(title);
+      await localDataSource.addTask(title, description);
       return const Right(unit);
     } catch (e) {
       return Left(CacheFailure());
