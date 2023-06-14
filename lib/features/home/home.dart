@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../auth/auth.dart';
 import '../projects/projects.dart';
+import '../settings/presentation/screens/settings_screen.dart';
 import 'presentation/screens/home_screen.dart';
 import 'presentation/widgets/app_scaffold.dart';
 
@@ -42,9 +43,9 @@ class HomeFeature extends Feature {
               },
             ),
             GoRoute(
-              path: '/settings',
+              path: SettingsScreen.routePath,
               builder: (BuildContext context, GoRouterState state) {
-                return const Center(child: Text('Settings'));
+                return const SettingsScreen();
               },
             ),
           ],

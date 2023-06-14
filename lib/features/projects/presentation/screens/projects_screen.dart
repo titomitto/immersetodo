@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/tasks_list_view.dart';
+import '../widgets/projects_list_view.dart';
 
 class ProjectsScreen extends StatelessWidget {
   static String get routePath => "/projects";

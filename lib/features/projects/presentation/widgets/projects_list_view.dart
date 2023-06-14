@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:immersetodo/widgets/empty_view.dart';
 
 import '../../../../utils/failure.dart';
+import '../../../../widgets/error_view.dart';
 import '../controllers/project_controller.dart';
 import '../controllers/projects_controller.dart';
 import '../states/project_state.dart';
 import '../states/projects_state.dart';
-import 'error_view.dart';
 import 'project_view.dart';
 
 class ProjectsListView extends ConsumerStatefulWidget {

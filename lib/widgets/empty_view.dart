@@ -29,7 +29,6 @@ class EmptyView extends StatelessWidget {
           Text(
             message,
             style: const TextStyle(
-              color: Colors.white,
               fontSize: 20,
             ),
           ),
