@@ -7,4 +7,5 @@ class Images {
   static const String userPlaceholder = "assets/images/user-2.png";
   static const String smilingFolder = "assets/images/smiling-folder.json";
   static const String errorState = "assets/images/error-state.json";
+  static const String soundWaves = "assets/images/sound-waves-2.png";
 }

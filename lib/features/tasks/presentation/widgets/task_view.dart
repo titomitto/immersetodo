@@ -113,6 +113,7 @@ class PomodoroButton extends ConsumerWidget {
       onTap: () {
         context.push(PomodoroScreen.routePath);
       },
+      behavior: HitTestBehavior.opaque,
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: Icon(
