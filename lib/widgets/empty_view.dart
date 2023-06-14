@@ -4,8 +4,10 @@ import 'package:lottie/lottie.dart';
 import '../../../../config/images.dart';
 
 class EmptyView extends StatelessWidget {
+  final String message;
   const EmptyView({
     super.key,
+    required this.message,
   });
 
   @override
@@ -24,9 +26,9 @@ class EmptyView extends StatelessWidget {
             Images.smilingFolder,
             width: 250,
           ),
-          const Text(
-            "No tasks yet",
-            style: TextStyle(
+          Text(
+            message,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
             ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:immersetodo/widgets/error_view.dart';
 
 import '../../../../utils/failure.dart';
+import '../../../../widgets/empty_view.dart';
 import '../../tasks.dart';
 import '../controllers/task_controller.dart';
 import '../states/task_state.dart';
-import 'empty_view.dart';
-import 'error_view.dart';
 import 'task_view.dart';
 
 class TasksListView extends ConsumerStatefulWidget {
@@ -27,7 +27,7 @@ class _TasksListViewState extends ConsumerState<TasksListView> {
       }
     });
 
-    if (state is TasksLoading) {
+    if (state is TasksLoading && state.tasks.isEmpty) {
       return const Center(
         child: CircularProgressIndicator(),
       );
@@ -38,10 +38,12 @@ class _TasksListViewState extends ConsumerState<TasksListView> {
     }
 
     if (state is TasksEmpty) {
-      return const EmptyView();
+      return const EmptyView(
+        message: "No tasks added",
+      );
     }
 
-    if (state is TasksData) {
+    if (state is TasksData || state.tasks.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 15,

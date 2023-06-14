@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:immersetodo/widgets/empty_view.dart';
 
 import '../../../../utils/failure.dart';
 import '../controllers/project_controller.dart';
 import '../controllers/projects_controller.dart';
 import '../states/project_state.dart';
 import '../states/projects_state.dart';
-import 'empty_view.dart';
 import 'error_view.dart';
 import 'project_view.dart';
 
@@ -42,13 +42,14 @@ class _ProjectsListViewState extends ConsumerState<ProjectsListView> {
     }
 
     if (state is ProjectsEmpty) {
-      return const EmptyView();
+      return const EmptyView(
+        message: "No projects found",
+      );
     }
 
     if (state is ProjectsData) {
       return Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 15,
           vertical: 10,
         ),
         child: ListView.builder(

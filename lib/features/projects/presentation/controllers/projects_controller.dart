@@ -11,7 +11,7 @@ class ProjectsController extends StateNotifier<ProjectsState> {
   }
 
   Future<void> getProjects() async {
-    state = ProjectsLoading();
+    state = ProjectsLoading(state.projects);
 
     var response = await getProjectsUseCase();
 

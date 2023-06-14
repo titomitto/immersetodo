@@ -1,6 +1,8 @@
 import 'package:core/core.dart';
 
-abstract class TaskState {}
+abstract class TaskState {
+  const TaskState();
+}
 
 class TaskInitial extends TaskState {}
 

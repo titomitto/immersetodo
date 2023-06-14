@@ -10,12 +10,12 @@ class TasksController extends StateNotifier<TasksState> {
   }
 
   Future<void> getTasks() async {
-    state = TasksLoading();
+    state = TasksLoading(state.tasks);
 
     var response = await getTasksUseCase();
 
     response.fold((failure) {
-      state = TasksError(failure);
+      state = TasksError(failure, state.tasks);
     }, (tasks) {
       if (tasks.isEmpty) {
         state = TasksEmpty();
