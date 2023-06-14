@@ -39,6 +39,7 @@ dependencies:
   connecteo: ^1.0.2
   core:
     path: ./packages/core
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:
