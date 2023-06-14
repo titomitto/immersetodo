@@ -6,11 +6,11 @@ import 'package:immersetodo/features/home/presentation/screens/home_screen.dart'
 import 'package:immersetodo/features/projects/presentation/screens/projects_screen.dart';
 import 'package:immersetodo/features/projects/presentation/widgets/add_project_form.dart';
 
-import '../../../../utils/utils.dart';
-import '../../../auth/auth.dart';
-import '../../../settings/presentation/screens/settings_screen.dart';
-import '../../../stats/presentation/screens/stats_screen.dart';
-import '../../../tasks/presentation/widgets/add_task_form.dart';
+import '../utils/utils.dart';
+import '../features/auth/auth.dart';
+import '../features/settings/presentation/screens/settings_screen.dart';
+import '../features/stats/presentation/screens/stats_screen.dart';
+import '../features/tasks/presentation/widgets/add_task_form.dart';
 
 class AppScaffold extends ConsumerWidget {
   final Widget child;
@@ -24,6 +24,13 @@ class AppScaffold extends ConsumerWidget {
     var currentRoute = GoRouter.of(context).location;
     var isProject = currentRoute == ProjectsScreen.routePath;
     var authState = ref.watch(authStateProvider);
+    var routeIndex = [
+      HomeScreen.routePath,
+      ProjectsScreen.routePath,
+      "",
+      StatsScreen.routePath,
+      SettingsScreen.routePath,
+    ].indexOf(currentRoute);
 
     if (authState is Unauthenticated) {
       return const SizedBox();
@@ -34,13 +41,7 @@ class AppScaffold extends ConsumerWidget {
         child: child,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: [
-          HomeScreen.routePath,
-          ProjectsScreen.routePath,
-          "",
-          StatsScreen.routePath,
-          SettingsScreen.routePath,
-        ].indexOf(currentRoute),
+        currentIndex: routeIndex != -1 ? routeIndex : 0,
         onTap: (index) {
           if (index == 0) {
             context.go(HomeScreen.routePath);
@@ -49,10 +50,10 @@ class AppScaffold extends ConsumerWidget {
             context.go(ProjectsScreen.routePath);
           }
           if (index == 3) {
-            context.go("/stats");
+            context.go(StatsScreen.routePath);
           }
           if (index == 4) {
-            context.go("/settings");
+            context.go(SettingsScreen.routePath);
           }
         },
         backgroundColor: Colors.white,

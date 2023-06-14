@@ -40,6 +40,7 @@ dependencies:
   core:
     path: ./packages/core
   flutter_switch: ^0.3.2
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:

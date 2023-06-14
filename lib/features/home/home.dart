@@ -5,8 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../auth/auth.dart';
 import '../projects/projects.dart';
 import '../settings/presentation/screens/settings_screen.dart';
+import '../stats/presentation/screens/stats_screen.dart';
 import 'presentation/screens/home_screen.dart';
-import 'presentation/widgets/app_scaffold.dart';
+import '../../widgets/app_scaffold.dart';
 
 class HomeFeature extends Feature {
   @override
@@ -37,9 +38,9 @@ class HomeFeature extends Feature {
               },
             ),
             GoRoute(
-              path: '/stats',
+              path: StatsScreen.routePath,
               builder: (BuildContext context, GoRouterState state) {
-                return const Center(child: Text('Stats'));
+                return const StatsScreen();
               },
             ),
             GoRoute(

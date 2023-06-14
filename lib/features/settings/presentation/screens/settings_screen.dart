@@ -53,7 +53,7 @@ class SettingsScreen extends ConsumerWidget {
                 width: 50,
                 child: FlutterSwitch(
                   value: false,
-                  width: 48.0,
+                  width: 45.0,
                   height: 22.0,
                   toggleSize: 19,
                   activeColor: Theme.of(context).primaryColor,

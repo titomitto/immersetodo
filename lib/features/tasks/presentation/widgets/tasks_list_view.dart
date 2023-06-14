@@ -21,8 +21,14 @@ class _TasksListViewState extends ConsumerState<TasksListView> {
   Widget build(BuildContext context) {
     var state = ref.watch(tasksProvider);
 
+    ref.listen(tasksProvider, (previous, next) {
+      if (next is TaskDeleted || next is TaskUpdated) {
+        ref.read(tasksProvider.notifier).getTasks();
+      }
+    });
+
     ref.listen(taskProvider, (previous, next) {
-      if (next is TaskAdded || next is TaskDeleted || next is TaskUpdated) {
+      if (next is TaskAdded) {
         ref.read(tasksProvider.notifier).getTasks();
       }
     });
@@ -33,7 +39,7 @@ class _TasksListViewState extends ConsumerState<TasksListView> {
       );
     }
 
-    if (state is TasksError) {
+    if (state is TasksFailed) {
       return ErrorView(message: mapFailureToMessage(context, state.failure));
     }
 

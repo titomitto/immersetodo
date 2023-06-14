@@ -23,7 +23,15 @@ class TasksEmpty extends TasksState {
   TasksEmpty() : super([]);
 }
 
-class TasksError extends TasksState {
+class TasksFailed extends TasksState {
   final Failure failure;
-  TasksError(this.failure, super.tasks);
+  TasksFailed(this.failure) : super([]);
+}
+
+class TaskDeleted extends TasksState {
+  TaskDeleted(super.tasks);
+}
+
+class TaskUpdated extends TasksState {
+  TaskUpdated(super.tasks);
 }

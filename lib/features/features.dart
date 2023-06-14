@@ -5,6 +5,7 @@ import 'package:immersetodo/features/tasks/tasks.dart';
 
 import 'auth/auth.dart';
 import 'onboarding/onboarding.dart';
+import 'pomodoro/pomodoro.dart';
 import 'projects/projects.dart';
 import 'stats/stats.dart';
 
@@ -16,4 +17,5 @@ List<Feature> features = [
   ProjectsFeature(),
   SettingsFeature(),
   StatsFeature(),
+  PomodoroFeature(),
 ];
