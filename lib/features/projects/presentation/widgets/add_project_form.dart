@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:immersetodo/utils/utils.dart';
+import 'package:immersetodo/widgets/primary_button.dart';
 
 import '../../../projects/domain/domain.dart';
 import '../controllers/project_controller.dart';
@@ -56,6 +57,8 @@ class _AddProjectFormState extends ConsumerState<AddProjectForm> {
       }
     });
 
+    final projectState = ref.watch(projectProvider);
+
     return Form(
       key: formKey,
       child: Column(
@@ -78,16 +81,12 @@ class _AddProjectFormState extends ConsumerState<AddProjectForm> {
           const SizedBox(
             height: 10,
           ),
-          MaterialButton(
-            minWidth: double.infinity,
-            onPressed: () {
+          PrimaryButton(
+            onTap: () {
               if (formKey.currentState!.validate()) submit();
             },
-            color: const Color(0xffffd78a),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
-              child: Text("Save Project"),
-            ),
+            title: "Save Project",
+            isLoading: projectState is SavingProject,
           ),
         ],
       ),

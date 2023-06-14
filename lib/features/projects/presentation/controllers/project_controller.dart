@@ -14,7 +14,7 @@ class ProjectController extends StateNotifier<ProjectState> {
   }) : super(ProjectInitial());
 
   void saveProject(String title) async {
-    state = ProjectSaving();
+    state = SavingProject();
     var response = await addProject(AddProjectParams(title: title));
     await response.fold((failure) {
       state = ProjectFailed(failure);

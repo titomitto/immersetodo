@@ -4,7 +4,7 @@ abstract class ProjectState {}
 
 class ProjectInitial extends ProjectState {}
 
-class ProjectSaving extends ProjectState {}
+class SavingProject extends ProjectState {}
 
 class ProjectAdded extends ProjectState {}
 
